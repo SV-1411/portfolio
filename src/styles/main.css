@@ -2843,3 +2843,121 @@ body {
     max-width: 90vw;
   }
 }
+
+/* =====================================================
+   GLASSMORPHISM UNIFICATION LAYER
+   One consistent glass recipe across every surface:
+   translucent navy base + blur/saturate + 1px cool border
+   + faint inner highlight on the top edge.
+   ===================================================== */
+
+.glass-card,
+.glass-panel,
+.hud-controls,
+#explore-prompt,
+.loader-terminal,
+.story-part {
+  background: rgba(13, 17, 38, 0.38);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  border-radius: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 212, 255, 0.35);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(0, 212, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Project cards inside the About page get the same glass treatment */
+.project-item {
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.project-item:hover {
+  border-color: rgba(0, 212, 255, 0.3) !important;
+  transform: translateY(-2px);
+}
+
+/* Back button — was flat, now matches the glass system */
+.back-btn {
+  background: rgba(13, 17, 38, 0.38);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(0, 212, 255, 0.18);
+}
+
+/* ---------- PERSISTENT GLASS NAV (top center) ---------- */
+.main-nav {
+  position: fixed;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.35rem;
+  border-radius: 50px;
+  background: rgba(13, 17, 38, 0.45);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.nav-links .nav-btn {
+  border: none;
+  background: transparent;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.72rem;
+  border-radius: 50px;
+}
+
+.nav-links .nav-btn:hover {
+  background: rgba(0, 212, 255, 0.12);
+  box-shadow: none;
+}
+
+/* Keep the nav out of the way on small screens — Back buttons handle it */
+@media (max-width: 768px) {
+  .main-nav {
+    display: none;
+  }
+}
+
+/* ---------- LANDING HINT ---------- */
+.landing-hint {
+  margin-top: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.04em;
+}
+
+.landing-hint strong {
+  color: rgba(0, 212, 255, 0.75);
+  font-weight: 400;
+}
+
+/* Loader terminal gets padding so its new glass body breathes */
+.loader-terminal {
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+}

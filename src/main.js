@@ -21,6 +21,7 @@ const STATE = {
   journeyLoaded: 0,
   journeyLoopRunning: false,
   journeyListenersBound: false,
+  journeyIntroDone: false,
   journeyStartTime: null
 };
 
@@ -551,83 +552,86 @@ function initSpaceExplorer() {
   // --- Planets with Orbital Physics ---
   const planets = [
     {
-      id: 'sun', label: 'ABOUT_ME.DAT', desc: 'Summary', icon: '☀️',
+      id: 'sun', label: 'ABOUT_ME.DAT', desc: 'About Me', icon: '☀️',
       x: 0, y: 0, r: 90, color: '#ffcc00', glowColor: 'rgba(255,204,0,0.6)', ring: false, orbitRadius: 0, orbitAngle: 0, orbitSpeed: 0,
-      detail: '<strong>SHIVANSH P VERMA</strong><br><br>Freelancer | Full-Stack Engineer | AI Systems Builder | Cross-Platform Developer<br><br>Developer focused on building practical, reliable systems that work beyond the basics. Enjoys understanding how things work end-to-end and solving problems through clean, scalable solutions. Brings consistency, curiosity, and a hands-on approach to building and improving products. Values clarity, efficiency, and building things that hold up in real use.',
+      detail: 'Hey — I\'m <strong>Shivansh Verma</strong>, a full-stack & AI engineer from Nagpur, India.<br><br>I build things end-to-end: AI memory systems, a wearable that helps blind people navigate, marketplaces, cross-platform apps. I like problems where I have to understand the whole machine, not just my corner of it.<br><br>Right now I\'m managing product and engineering at Gigzs, finishing my B.Tech (8.95 CGPA), and shipping freelance work on the side.<br><br>If you\'re hiring someone who actually ships — fly around. The planets don\'t bite.',
       satellites: [
-        { id: 'sun1', label: 'VISION.TXT', desc: 'Tech Architect', icon: '🚀', r: 12, orbit: 140, speed: 0.005, detail: '<strong>Visionary Tech Architect</strong><br><br>I rethink how humans and machines interact. From leading NASA Space Apps Nagpur to building semantic memory layers (GML) for AI, my work focuses on the intersection of scalability, intelligence, and human-like reasoning.' },
-        { id: 'sun2', label: 'MINDSET.LOG', desc: 'Builder Mindset', icon: '⚙️', r: 10, orbit: 180, speed: -0.003, detail: '<strong>Practical & Reliable Systems</strong><br><br>Focused on building practical, reliable systems that work beyond the basics. Enjoys understanding how things work end-to-end and solving problems through clean, scalable solutions. Brings consistency, curiosity, and a hands-on approach to building and improving products.' }
+        { id: 'sun1', label: 'NOW.LOG', desc: 'What I\'m On Right Now', icon: '🛰️', r: 12, orbit: 140, speed: 0.005, detail: '<strong>Current Missions</strong><br><br>• <strong>Supermemory (GML)</strong> — a long-term memory layer that lets AI assistants like Claude and GPT remember you across sessions.<br>• Leading product & engineering at <strong>Gigzs</strong>.<br>• Freelance client work — two apps currently live in production.<br>• Final stretch of my B.Tech in Computer Science.' },
+        { id: 'sun2', label: 'WHY.TXT', desc: 'What Drives Me', icon: '🚀', r: 10, orbit: 180, speed: -0.003, detail: '<strong>The Honest Answer</strong><br><br>Space, mostly. I don\'t come from a background that leads there, so I\'m building my own path — through code, startups, and learning things I don\'t fully understand yet.<br><br>Day to day, what keeps me going is simpler: I like making things that hold up in real use. Demos are easy. Systems that survive real users are the actual game.' }
       ]
     },
     {
       id: 'mercury', label: 'EDUCATION.LOG', desc: 'Education', icon: '☿️',
       r: 25, color: '#a0a0a0', glowColor: 'rgba(160,160,160,0.4)', ring: false, orbitRadius: 350, orbitAngle: Math.random() * Math.PI * 2, orbitSpeed: 0.007,
-      detail: '<strong>Academic Journey</strong><br><br>My formal education laid the groundwork for my theoretical understanding of complex systems, focused on computer science and engineering at G.H. Raisoni.',
+      detail: '<strong>Education</strong><br><br>B.Tech in Computer Science & Engineering at G.H. Raisoni College, Nagpur (2023–2027).<br><br>Holding an <strong>8.95 CGPA</strong> while running everything else on this map — which tells you more about my time management than any bullet point could.',
       satellites: [
-        { id: 'mer1', label: 'BTECH_CSE.DEG', desc: 'G.H. Raisoni College', icon: '🎓', r: 10, orbit: 80, speed: 0.01, detail: '<strong>G.H. Raisoni College of Engineering, Nagpur</strong><br><br><strong>Degree:</strong> Bachelor of Technology in Computer Science & Engineering<br><strong>Timeline:</strong> 2023 – 2027<br><strong>Performance:</strong> CGPA: 8.95 / 10' }
+        { id: 'mer1', label: 'BTECH_CSE.DEG', desc: 'G.H. Raisoni College', icon: '🎓', r: 10, orbit: 80, speed: 0.01, detail: '<strong>G.H. Raisoni College of Engineering, Nagpur</strong><br><br><strong>Degree:</strong> B.Tech, Computer Science & Engineering<br><strong>Timeline:</strong> 2023 – 2027<br><strong>CGPA:</strong> 8.95 / 10<br><br>Focus areas: systems architecture and AI — the theory behind the things I was already building anyway.' }
       ]
     },
     {
       id: 'venus', label: 'PROJECTS.EXE', desc: 'Projects', icon: '🔴',
       r: 40, color: '#ff6b35', glowColor: 'rgba(255,107,53,0.4)', ring: false, orbitRadius: 650, orbitAngle: Math.random() * Math.PI * 2, orbitSpeed: 0.004,
-      detail: '<strong>The Forge of Innovation</strong><br><br>This is where I build things that don\'t exist yet. My projects focus on solving real problems with scalable architecture.',
+      detail: '<strong>Things I\'ve Built</strong><br><br>Five moons, five real projects — two of them live in production for paying clients, one wearable that passed thesis evaluation, and two AI systems built to fix problems I personally ran into.<br><br>Every one of these taught me something a tutorial couldn\'t.',
       satellites: [
-        { id: 'p1', label: 'GML.AI', desc: 'Gigzs Memory Layer', icon: '🧠', r: 12, orbit: 120, speed: 0.005, detail: '<strong>Gigzs Memory Layer (GML): Rethinking How AI Remembers</strong><br><br>GML is a semantic, relational memory system designed to give AI long-term, contextual recall. Instead of storing conversations as raw text, GML models Entities, Relationships, and Events as vector embeddings, queried using cosine similarity.', tech: 'Vector Embeddings, Cosine Similarity, Python, AI Modeling' },
-        { id: 'p2', label: 'DRISHTI.CAP', desc: 'Drishti Cap', icon: '👁️', r: 10, orbit: 160, speed: -0.003, detail: '<strong>Drishti Cap: AI Wearable for Visually Impaired</strong><br><br>Wearable camera-cap on Raspberry Pi delivering real-time object detection, facial recognition, and obstacle identification. Optimized YOLOv8 and TensorFlow for edge inference.', tech: 'Python, YOLOv8, TensorFlow, Raspberry Pi, OpenCV' },
-        { id: 'p3', label: 'ARQIV.EXE', desc: 'ArqivAI', icon: '📚', r: 10, orbit: 200, speed: 0.004, detail: '<strong>ArqivAI: Multi-Model AI Research Assistant</strong><br><br>Routes queries to multiple LLMs in parallel and cross-validates all outputs into one high-confidence answer. Achieved ~40% fewer hallucinations using confidence scoring.', tech: 'FastAPI, LLM Orchestration, Fine-tuning, REST', link: 'https://arqiv.kesug.com/?i=1' }
+        { id: 'p1', label: 'GML.AI', desc: 'Supermemory (GML)', icon: '🧠', r: 12, orbit: 110, speed: 0.005, detail: '<strong>Supermemory (GML) — Cross-Model AI Memory</strong><br><br>AI assistants forget you the moment a session ends. GML fixes that: a persistent memory layer that lets models like Claude and GPT retain user context across sessions and even across providers.<br><br>The semantic embedding pipeline (Pinecone + ChromaDB) improved response relevance by <strong>~35%</strong>. I handle vector indexing, similarity thresholds, and retrieval latency tuning on an Azure VM I run myself.', tech: 'Pinecone, ChromaDB, Vector Embeddings, Azure VM, Node.js' },
+        { id: 'p2', label: 'DRISHTI.CAP', desc: 'Drishti Cap', icon: '👁️', r: 10, orbit: 150, speed: -0.003, detail: '<strong>Drishti Cap — A Camera-Cap That Speaks</strong><br><br>A wearable for visually impaired users: real-time object detection, face recognition, and obstacle alerts — all converted instantly to audio. Runs fully on-device on a Raspberry Pi. No cloud, no connectivity excuses.<br><br>Getting YOLOv8 and TensorFlow to perform under strict edge-hardware constraints was the hard part. Validated end-to-end and passed thesis evaluation.', tech: 'Python, YOLOv8, TensorFlow, Raspberry Pi, OpenCV, TTS' },
+        { id: 'p3', label: 'ARQIV.EXE', desc: 'ArqivAI', icon: '📚', r: 10, orbit: 190, speed: 0.004, detail: '<strong>ArqivAI — Ask Once, Get an Answer Models Agree On</strong><br><br>A research assistant that routes each query to 4+ LLMs in parallel, then cross-validates the outputs into one high-confidence answer using confidence scoring and source tracking.<br><br>Result: <strong>~40% fewer hallucinations</strong> than a single-model baseline. FastAPI backend, unified interface, fine-tuned domain adapters.', tech: 'FastAPI, LLM Orchestration, Fine-tuning, REST APIs', link: 'https://arqiv.kesug.com/?i=1' },
+        { id: 'p4', label: 'FOUNDER.APP', desc: 'Founder Network App', icon: '🤝', r: 10, orbit: 230, speed: -0.0035, detail: '<strong>Founder Networking App — Live in Production</strong><br><br>A cross-platform app connecting startup founders, investors, and domain experts through role-based feeds. One Capacitor codebase shipping to Android, iOS, and Web.<br><br>Built solo for a freelance client, currently live with real users. Shipping to three platforms from one codebase teaches you respect for the small differences fast.', tech: 'Capacitor, React, Android Studio, Xcode' },
+        { id: 'p5', label: 'MLS.ESTATE', desc: 'US Real-Estate Platform', icon: '🏠', r: 10, orbit: 270, speed: 0.003, detail: '<strong>MLS Listings Platform — US Real-Estate Client</strong><br><br>A large-scale property listings platform with Airbnb-style browsing, search, and filtering over live MLS data.<br><br>Built for a US client as a freelance engagement — the kind of project where "it works on my machine" isn\'t an acceptable sentence.', tech: 'React, Node.js, REST APIs, SQL' }
       ]
     },
     {
       id: 'earth', label: 'ROLES.LOG', desc: 'Experience', icon: '🌍',
       r: 45, color: '#00d4ff', glowColor: 'rgba(0,212,255,0.4)', ring: false, orbitRadius: 1000, orbitAngle: Math.random() * Math.PI * 2, orbitSpeed: 0.0025,
-      detail: '<strong>Professional Experience</strong><br><br>Working with cross-functional teams to deliver high-impact products and leading initiatives that matter.',
+      detail: '<strong>Where I\'ve Been On the Hook</strong><br><br>Roles where people actually depended on the outcome — leading a team, shipping for clients, running events for hundreds of participants. Less "exposure to", more "responsible for".',
       satellites: [
-        { id: 'e1', label: 'GIGZS.CORP', desc: 'Project Manager @ Gigzs', icon: '💼', r: 12, orbit: 120, speed: 0.006, detail: '<strong>Gigzs — AI-Powered Gig Marketplace</strong><br><em>Sept 2024 - Present</em><br><br>Led delivery of an AI gig marketplace with a 6-person team. Owned full-stack development covering frontend UX, backend APIs, and Azure VM deployment. Defined product roadmap as the sole communication bridge between founders, developers, and designers.', tech: 'Next.js, Supabase, Node.js, Azure VM' },
-        { id: 'e2', label: 'FREELANCE.DEV', desc: 'Full-Stack Freelancer', icon: '💻', r: 12, orbit: 170, speed: -0.004, detail: '<strong>Independent Client Projects</strong><br><em>2024 - 2025</em><br><br>Delivered 5+ client projects across web, mobile, and cross-platform including a live cross-platform founder networking app using Capacitor.', tech: 'Capacitor, Android Studio, Xcode, React' },
-        { id: 'e3', label: 'NASA.LEAD', desc: 'Tech Lead @ Space Apps', icon: '🚀', r: 10, orbit: 220, speed: 0.003, detail: '<strong>Tech Lead @ NASA Space Apps Nagpur</strong><br><em>2022 - 2025</em><br><br>Orchestrated city-wide hackathons, led technical mentorship for hundreds of participants, and managed the deployment of event infrastructure.' }
+        { id: 'e1', label: 'GIGZS.CORP', desc: 'PM & Full-Stack @ Gigzs', icon: '💼', r: 12, orbit: 120, speed: 0.006, detail: '<strong>Gigzs — AI-Powered Gig Marketplace</strong><br><em>Sept 2024 – Present</em><br><br>Led a 6-person cross-functional team building an AI gig marketplace to <strong>500+ users</strong> before a strategic pivot. Owned the full stack — frontend UX, backend APIs, Azure VM deployment — while being the single communication bridge between founders, developers, and designers.<br><br>Translation: when something broke, it was my phone that rang.', tech: 'Next.js, Supabase, Node.js, Azure VM' },
+        { id: 'e2', label: 'FREELANCE.DEV', desc: 'Full-Stack Freelancer', icon: '💻', r: 12, orbit: 170, speed: -0.004, detail: '<strong>Independent Client Work</strong><br><em>2024 – 2025</em><br><br>Delivered <strong>5+ client projects</strong> across web, mobile, and cross-platform — including the founder networking app (live in production on Android, iOS & Web) and a large-scale US real-estate MLS platform.<br><br>Freelancing teaches you the skill no course covers: shipping things people pay for, on deadlines they chose.', tech: 'Capacitor, React, Node.js, Android Studio, Xcode' },
+        { id: 'e3', label: 'NASA.LEAD', desc: 'Tech Lead @ Space Apps', icon: '🚀', r: 10, orbit: 220, speed: 0.003, detail: '<strong>Technical Team Lead — NASA Space Apps Challenge, Nagpur</strong><br><em>2023 – 2025</em><br><br>Helped run city-wide hackathons for the world\'s largest space & science hackathon: technical mentorship for hundreds of participants, plus owning the event infrastructure that everything ran on.<br><br>For someone whose whole map points at space, this one wasn\'t really work.' }
       ]
     },
     {
       id: 'mars', label: 'TECH_ARSENAL.DAT', desc: 'Skills', icon: '🪐',
       r: 35, color: '#ff2d55', glowColor: 'rgba(255,45,85,0.4)', ring: false, orbitRadius: 1400, orbitAngle: Math.random() * Math.PI * 2, orbitSpeed: 0.0018,
-      detail: '<strong>Technical Arsenal</strong><br><br>The tools, languages, and frameworks I use to bend machines to my will.',
+      detail: '<strong>The Toolkit</strong><br><br>Tools are just tools — what matters is what got shipped with them. Everything listed on these moons has been used in a real project on this map, not just in a tutorial.',
       satellites: [
-        { id: 's1', label: 'LANGUAGES.DAT', desc: 'Core Languages', icon: '🗣️', r: 9, orbit: 100, speed: 0.007, detail: '<strong>Programming Languages</strong><br><br>• JavaScript / TypeScript<br>• Java<br>• C++<br>• Python<br>• PHP<br>• SQL' },
-        { id: 's2', label: 'FULLSTACK.SYS', desc: 'Web & Mobile', icon: '🌐', r: 9, orbit: 140, speed: -0.005, detail: '<strong>Frontend, Backend & Mobile</strong><br><br>• Next.js & React<br>• Node.js & Express.js<br>• HTML5 / CSS3<br>• Android Studio / Xcode<br>• Capacitor' },
-        { id: 's3', label: 'AI_ML.NET', desc: 'Artificial Intelligence', icon: '🤖', r: 9, orbit: 180, speed: 0.004, detail: '<strong>AI & Machine Learning</strong><br><br>• YOLOv8 & TensorFlow<br>• LLM Orchestration & RAG Pipelines<br>• Vector Embeddings & Fine-tuning<br>• OpenCV' },
-        { id: 's4', label: 'DATA_INFRA.LOG', desc: 'Databases & Infra', icon: '🗄️', r: 9, orbit: 220, speed: -0.003, detail: '<strong>Data Systems & Infrastructure</strong><br><br>• Supabase & Firebase<br>• MongoDB & MySQL<br>• Pinecone & ChromaDB<br>• Azure VM & Nginx<br>• Git / GitHub / Docker' }
+        { id: 's1', label: 'LANGUAGES.DAT', desc: 'Languages', icon: '🗣️', r: 9, orbit: 100, speed: 0.007, detail: '<strong>Languages</strong><br><br><strong>Daily drivers:</strong><br>• JavaScript / TypeScript<br>• Java<br>• C++<br>• SQL<br><br><strong>Comfortable with:</strong><br>• Python (all my AI/edge work)<br>• PHP' },
+        { id: 's2', label: 'FULLSTACK.SYS', desc: 'Web & Mobile', icon: '🌐', r: 9, orbit: 140, speed: -0.005, detail: '<strong>Frontend, Backend & Mobile</strong><br><br>• Next.js & React — Gigzs, MLS platform<br>• Node.js & Express — APIs behind everything<br>• REST API design<br>• Capacitor + Android Studio + Xcode — one codebase, three platforms, live in production<br>• HTML5 / CSS3 — including this site, hand-rolled, no framework' },
+        { id: 's3', label: 'AI_ML.NET', desc: 'AI & Machine Learning', icon: '🤖', r: 9, orbit: 180, speed: 0.004, detail: '<strong>AI & Machine Learning</strong><br><br>• LLM Orchestration & RAG pipelines — ArqivAI, Supermemory<br>• Vector Embeddings & Fine-tuning<br>• YOLOv8 & TensorFlow — optimized for edge inference on Drishti Cap<br>• OpenCV<br><br>Not "prompt engineering" — actual retrieval systems, actual model deployment on actual hardware.' },
+        { id: 's4', label: 'DATA_INFRA.LOG', desc: 'Data & Infrastructure', icon: '🗄️', r: 9, orbit: 220, speed: -0.003, detail: '<strong>Data & Infrastructure</strong><br><br>• Supabase, Firebase, MongoDB, MySQL, TiDB<br>• Pinecone & ChromaDB — vector search in production<br>• Azure VM + Nginx — I deploy and babysit my own servers<br>• Git / GitHub, Docker<br>• Raspberry Pi — when the cloud isn\'t allowed to exist' }
       ]
     },
     {
       id: 'jupiter', label: 'CERTS.TXT', desc: 'Certifications', icon: '📜',
       r: 65, color: '#f3b05a', glowColor: 'rgba(243,176,90,0.4)', ring: false, orbitRadius: 1850, orbitAngle: Math.random() * Math.PI * 2, orbitSpeed: 0.0012,
-      detail: '<strong>Certifications & Training</strong><br><br>Validations of my continuous learning journey across deep learning, databases, and enterprise architecture.',
+      detail: '<strong>Certifications</strong><br><br>Paper doesn\'t build systems, but it does prove I go deep on fundamentals instead of just winging it. Deep learning, distributed databases, classical ML, and the language I started with.',
       satellites: [
-        { id: 'c1', label: 'NVIDIA.DLI', desc: 'Deep Learning', icon: '🟢', r: 10, orbit: 130, speed: 0.005, detail: '<strong>Deep Learning Fundamentals</strong><br><br>Certified by NVIDIA Deep Learning Institute (DLI).' },
-        { id: 'c2', label: 'SALESFORCE.AI', desc: 'AI Associate', icon: '☁️', r: 10, orbit: 170, speed: -0.004, detail: '<strong>Salesforce AI Associate</strong><br><br>Certified via Salesforce Trailhead.' },
-        { id: 'c3', label: 'PINGCAP.DB', desc: 'TiDB Practitioner', icon: '🐬', r: 10, orbit: 210, speed: 0.003, detail: '<strong>TiDB Practitioner</strong><br><br>Certified by PingCAP for distributed SQL databases.' },
-        { id: 'c4', label: 'JAVA.MASTER', desc: 'Java Programming', icon: '☕', r: 10, orbit: 250, speed: -0.002, detail: '<strong>Java Programming Masterclass</strong><br><br>Comprehensive Java training completed via Udemy.' }
+        { id: 'c1', label: 'NVIDIA.DLI', desc: 'Deep Learning Fundamentals', icon: '🟢', r: 10, orbit: 120, speed: 0.005, detail: '<strong>Deep Learning Fundamentals</strong><br><em>NVIDIA Deep Learning Institute</em><br><br>Neural networks from the ground up — the theory behind the YOLOv8 and TensorFlow work on Drishti Cap.' },
+        { id: 'c2', label: 'STANFORD.ML', desc: 'Supervised ML — Andrew Ng', icon: '🎓', r: 10, orbit: 155, speed: -0.0045, detail: '<strong>Supervised Machine Learning: Regression & Classification</strong><br><em>Stanford University — Andrew Ng</em><br><br>The classic. Regression, classification, and the math that everything else in ML quietly stands on.' },
+        { id: 'c3', label: 'SALESFORCE.AI', desc: 'Salesforce AI Associate', icon: '☁️', r: 10, orbit: 190, speed: 0.0035, detail: '<strong>Salesforce AI Associate</strong><br><em>Salesforce Trailhead</em><br><br>AI in the context of CRM and enterprise systems — where "it works" also has to mean "it\'s compliant and explainable".' },
+        { id: 'c4', label: 'PINGCAP.DB', desc: 'TiDB Practitioner', icon: '🐬', r: 10, orbit: 225, speed: -0.003, detail: '<strong>TiDB Practitioner</strong><br><em>PingCAP</em><br><br>Distributed SQL databases — sharding, consensus, and why horizontal scaling is never as simple as the diagram suggests.' },
+        { id: 'c5', label: 'JAVA.MASTER', desc: 'Java Masterclass', icon: '☕', r: 10, orbit: 260, speed: 0.0025, detail: '<strong>Java Programming Masterclass (Java SE 17)</strong><br><em>Udemy — Tim Buchalka</em><br><br>The deep end of the first language I took seriously. OOP discipline that carried over into everything since.' }
       ]
     },
     {
       id: 'saturn', label: 'LEADERSHIP.LOG', desc: 'Leadership', icon: '🪐',
       r: 55, color: '#a855f7', glowColor: 'rgba(168,85,247,0.4)', ring: true, orbitRadius: 2350, orbitAngle: Math.random() * Math.PI * 2, orbitSpeed: 0.0008,
-      detail: '<strong>Leadership & Extracurriculars</strong><br><br>Stepping away from the keyboard to lead communities, organize events, and give back to society.',
+      detail: '<strong>Beyond the Keyboard</strong><br><br>Code is half the job. The other half is people — running communities, organizing events, and showing up for causes that have nothing to do with my career.',
       satellites: [
-        { id: 'l1', label: 'IEEE.SEC', desc: 'IEEE Secretary', icon: '⚡', r: 11, orbit: 140, speed: 0.004, detail: '<strong>Secretary @ IEEE Student Branch GHRCE</strong><br><em>2023 - 2025</em><br><br>Managed community platforms, organized technical workshops, and expanded technical outreach across the student body.' },
-        { id: 'l2', label: 'PHOENIX.LEAD', desc: 'Phoenix Forum', icon: '🐦', r: 11, orbit: 190, speed: -0.003, detail: '<strong>Technical Lead @ Phoenix Forum</strong><br><em>2024 - 2025</em><br><br>Spearheaded technical events and skill-building initiatives for the community.' },
-        { id: 'l3', label: 'NGO.VOL', desc: 'NGO Member', icon: '🤝', r: 11, orbit: 240, speed: 0.002, detail: '<strong>NGO Engagement</strong><br>Environmental and social volunteer work managing digital outreach and engagement for A Better Hand and House of Hearts.' }
+        { id: 'l1', label: 'IEEE.SEC', desc: 'Secretary, IEEE SB GHRCE', icon: '⚡', r: 11, orbit: 140, speed: 0.004, detail: '<strong>Secretary & Webmaster — IEEE Student Branch, GHRCE</strong><br><em>Aug 2023 – Sept 2025</em><br><br>Ran the branch\'s web infrastructure and official communications, organized technical workshops, and grew technical outreach across the student body. Two years of making sure events actually happened, not just got planned.' },
+        { id: 'l2', label: 'PHOENIX.LEAD', desc: 'Tech Lead, Phoenix Forum', icon: '🐦', r: 11, orbit: 190, speed: -0.003, detail: '<strong>Technical Lead — Phoenix Forum</strong><br><em>July 2024 – July 2025</em><br><br>Led technical events and skill-building initiatives — the kind of sessions I wish someone had run when I was struggling with the basics.' },
+        { id: 'l3', label: 'NGO.VOL', desc: 'Volunteer & Content Lead', icon: '🤝', r: 11, orbit: 240, speed: 0.002, detail: '<strong>Community Work</strong><br><br>• <strong>A Better Hand</strong> — environment NGO, member 2021–2024<br>• <strong>House of Hearts</strong> — Content Lead, 2023–2024<br><br>Digital outreach and engagement for causes that keep you grounded. Not everything has to compile.' }
       ]
     },
     {
       id: 'uranus', label: 'CONTACT.NET', desc: 'Contact', icon: '📞',
       r: 40, color: '#00ffff', glowColor: 'rgba(0,255,255,0.4)', ring: false, orbitRadius: 2850, orbitAngle: Math.random() * Math.PI * 2, orbitSpeed: 0.0005,
-      detail: '<strong>Comm-Link Established</strong><br><br>Open frequencies for collaboration, inquiries, or just to talk about the future of tech.',
+      detail: '<strong>Say Hi</strong><br><br>You made it to the edge of the system — that\'s usually a good sign.<br><br>If you\'re hiring, building something interesting, or just want to talk shop about AI, space, or why your side project broke at 2am — my comms are open. I reply fast.',
       satellites: [
-        { id: 'co1', label: 'EMAIL.COM', desc: 'Direct Message', icon: '✉️', r: 10, orbit: 100, speed: 0.006, detail: '<strong>Email</strong><br><br>shivansh1411@gmail.com', link: 'mailto:shivansh1411@gmail.com' },
-        { id: 'co2', label: 'PHONE.NET', desc: 'Voice Comms', icon: '📱', r: 10, orbit: 140, speed: -0.005, detail: '<strong>Phone</strong><br><br>+91 9623688451<br>Location: Nagpur, MH' },
-        { id: 'co3', label: 'GITHUB.GIT', desc: 'Code Vault', icon: '🐙', r: 10, orbit: 180, speed: 0.004, detail: '<strong>GitHub</strong><br><br>Review my open-source contributions and project repositories.', link: 'https://github.com/Shivansh1411' },
-        { id: 'co4', label: 'LINKEDIN.PRO', desc: 'Professional Net', icon: '💼', r: 10, orbit: 220, speed: -0.003, detail: '<strong>LinkedIn</strong><br><br>Connect with me professionally.', link: 'https://www.linkedin.com/in/shivansh-verma' }
+        { id: 'co1', label: 'EMAIL.COM', desc: 'Email Me', icon: '✉️', r: 10, orbit: 100, speed: 0.006, detail: '<strong>Email</strong><br><br>shivansh1411@gmail.com<br><br>The fastest way to reach me. Real messages get real replies — usually same day.', link: 'mailto:shivansh1411@gmail.com' },
+        { id: 'co2', label: 'PHONE.NET', desc: 'Call or WhatsApp', icon: '📱', r: 10, orbit: 140, speed: -0.005, detail: '<strong>Phone</strong><br><br>+91 9623688451<br>Nagpur, Maharashtra, India (IST)<br><br>Calls, WhatsApp — whatever works for you.' },
+        { id: 'co3', label: 'GITHUB.GIT', desc: 'See the Code', icon: '🐙', r: 10, orbit: 180, speed: 0.004, detail: '<strong>GitHub</strong><br><br>The receipts. Project repositories and contributions — including the source for this very site.', link: 'https://github.com/Shivansh1411' },
+        { id: 'co4', label: 'LINKEDIN.PRO', desc: 'Connect on LinkedIn', icon: '💼', r: 10, orbit: 220, speed: -0.003, detail: '<strong>LinkedIn</strong><br><br>The professional version of all this — endorsements, timeline, and significantly fewer planets.', link: 'https://www.linkedin.com/in/shivansh-verma' }
       ]
     }
   ];
@@ -1480,15 +1484,15 @@ function initJourney() {
       id: 'beginning',
       chapter: 'Part 01',
       title: 'The Beginning',
-      text: 'I wasn’t born into tech.<br>No childhood prodigy arc. No “I built my first app at 10.”<br>It was 2005. Tech wasn’t everywhere yet.<br>I was just… a kid.<br>Loud. Curious. Slightly chaotic.<br>Nothing special on paper —<br>but I always had this habit of asking why.<br>Not in a smart way. Just… constantly.<br>And somehow, that question stuck longer than everything else.',
+      text: 'I wasn’t born into tech.<br>No prodigy arc. No “built my first app at ten.”<br>2005. Tech wasn’t everywhere yet.<br>I was just a kid — loud, curious, slightly chaotic.<br>Nothing special on paper.<br>Except one habit that refused to leave:<br>asking <b>why</b>.<br>Not in a clever way. Just constantly.<br>Everything else about that kid faded.<br>The question stayed.',
       range: [0.02, 0.07],
       label: 'START'
     },
     {
       id: 'quiet',
       chapter: 'Part 02',
-      title: 'Becoming Weird',
-      text: 'As I grew up, something changed.<br>I got quieter.<br>Not because I had answers —<br>but because I had too many thoughts.<br>Overthinking became normal.<br>Curiosity didn’t go away — it just went deeper.<br>Especially about things I couldn’t understand.<br>Like space.<br>The kind of curiosity that doesn’t give peace…<br>it just makes you think more.',
+      title: 'The Quiet Years',
+      text: 'Growing up, I got quieter.<br>Not because I found answers —<br>because I had too many thoughts and nowhere to put them.<br>Overthinking became my default setting.<br>The curiosity didn’t fade. It went deeper —<br>straight toward the things I couldn’t understand.<br>Like space.<br>It’s the kind of curiosity that doesn’t give you peace.<br>It just keeps the lights on upstairs,<br>whether you want them on or not.',
       range: [0.12, 0.17],
       label: 'STILLNESS'
     },
@@ -1496,23 +1500,23 @@ function initJourney() {
       id: 'lockdown',
       chapter: 'Part 03',
       title: 'The Chaos Era',
-      text: 'And then COVID happened.<br>Lockdown. Boards. Uncertainty.<br>Honestly? I didn’t “use that time productively.”<br>I was just trying to get through it.<br>While everyone talked about learning new skills,<br>I was trying to deal with everything happening at once.<br>But that phase changed something.<br>It made me more blunt.<br>More aware.<br>Maybe a little less naive.<br>It wasn’t growth in the aesthetic “grind mindset” way…<br>it was just… reality hitting early.',
+      text: 'Then COVID hit.<br>Lockdown. Board exams. Uncertainty about everything.<br>I’ll be honest — I didn’t “use that time productively.”<br>I was just getting through it.<br>While the internet posted about new skills and morning routines,<br>I was dealing with everything happening at once.<br>But that phase did change something.<br>It made me blunter. More aware. Less naive.<br>Not growth in the aesthetic, grind-mindset way.<br>Just reality, arriving early.',
       range: [0.22, 0.27],
       label: 'CHAOS'
     },
     {
       id: 'coding',
       chapter: 'Part 04',
-      title: 'Enter Coding (or getting humbled)',
-      text: 'When I got into coding, I thought I’d finally found something.<br>Turns out — I found confusion instead.<br>Concepts made sense…<br>until I had to actually build something.<br>That’s where everything broke.<br>Blank screen vs me — and the screen was winning.<br>That’s when I realized:<br>understanding something doesn’t mean you can create it.',
+      title: 'Enter Coding (and Getting Humbled)',
+      text: 'When I found coding, I thought I’d finally found my thing.<br>What I actually found was confusion.<br>The concepts made perfect sense —<br>right up until I had to build something.<br>That’s where everything fell apart.<br>Me versus a blank screen.<br>The screen was winning.<br>That’s when I learned the lesson that still shapes how I work:<br><b>understanding something is not the same as being able to build it.</b>',
       range: [0.32, 0.37],
       label: 'HUMILITY'
     },
     {
       id: 'quit',
       chapter: 'Part 05',
-      title: 'The Questionable Phase',
-      text: 'This part?<br>Yeah, it wasn’t pretty.<br>I felt like quitting.<br>Not once. Not twice.<br>Almost every day.<br>Watching others build things while I struggled with basics…<br>yeah, that hits your confidence differently.<br>And the worst part?<br>I didn’t even know if I was improving.<br>I just… kept showing up.',
+      title: 'The Almost-Quit Phase',
+      text: 'This part wasn’t pretty.<br>I wanted to quit. Not once. Not twice.<br>Pretty much daily.<br>Watching other people ship things while I fought with basics —<br>that does something to your confidence.<br>And the worst part?<br>I couldn’t even tell if I was improving.<br>There was no progress bar. No checkpoint.<br>I just kept showing up.<br>At the time it felt like stubbornness.<br>Turns out it was the whole skill.',
       range: [0.42, 0.47],
       label: 'DOUBT'
     },
@@ -1520,7 +1524,7 @@ function initJourney() {
       id: 'shift',
       chapter: 'Part 06',
       title: 'The Shift',
-      text: 'There wasn’t a “main character transformation scene.”<br>Just a small, quiet decision:<br>Try anyway.<br>I stopped trying to understand everything perfectly…<br>and started building things imperfectly.<br>Small projects. Broken logic.<br>Stuff that barely worked — but worked enough.<br>And slowly…<br>things started making sense.<br>Not because I got smarter —<br>but because I got used to being bad at it.',
+      text: 'There was no main-character transformation scene.<br>Just a small, quiet decision: <b>try anyway.</b><br>I stopped trying to understand everything perfectly<br>and started building things imperfectly.<br>Small projects. Broken logic.<br>Code that barely worked — but worked enough.<br>And slowly, things clicked.<br>Not because I got smarter.<br>Because I got comfortable being bad at things<br>long enough to get good at them.',
       range: [0.52, 0.57],
       label: 'PERSISTENCE'
     },
@@ -1528,7 +1532,7 @@ function initJourney() {
       id: 'building',
       chapter: 'Part 07',
       title: 'Building Something Real',
-      text: 'One project turned into another.<br>And suddenly, I wasn’t just learning anymore —<br>I was building.<br>Startups. Hackathons. AI systems. Platforms.<br>Things like Gigzs, real-world apps, team projects —<br>where people actually depended on the outcome.<br>And somewhere in between all that…<br>I realized something weird:<br>I might still feel lost sometimes —<br>but I’m not where I started anymore.',
+      text: 'One project became another.<br>Then somewhere along the way, the word changed:<br>I wasn’t <b>learning</b> anymore. I was <b>building</b>.<br>A startup team at Gigzs. Hackathons with NASA’s name on them.<br>AI systems. Client apps live in production.<br>Things where real people depended on the outcome —<br>and the outcome depended on me.<br>I still feel lost sometimes.<br>But I’m nowhere near where I started.<br>And I have the receipts now.',
       range: [0.62, 0.67],
       label: 'MOMENTUM'
     },
@@ -1536,15 +1540,15 @@ function initJourney() {
       id: 'perspective',
       chapter: 'Part 08',
       title: 'Perspective',
-      text: 'When things get too loud in my head,<br>I look up.<br>Literally.<br>Space.<br>And it does something I can’t fully explain.<br>It makes everything feel small…<br>but at the same time, it makes everything feel bigger.<br>The emptiness. The scale. The unknown.<br>It’s overwhelming in a way that’s almost comforting.<br>And yeah…<br>I’ve had moments where I just sit there thinking about it.<br>Probably not the most productive use of time —<br>but definitely the most honest.',
+      text: 'When my head gets too loud,<br>I look up. Literally.<br>Space does something to me I can’t fully explain.<br>It makes everything feel small —<br>and somehow bigger at the same time.<br>The emptiness. The scale. The unknown.<br>Overwhelming in a way that’s almost comforting.<br>I’ve lost whole evenings just sitting with it.<br>Probably not the most productive use of my time.<br>Definitely the most honest.',
       range: [0.72, 0.77],
       label: 'SPACE'
     },
     {
       id: 'becoming',
       chapter: 'Part 09',
-      title: 'Becoming (Right Now)',
-      text: 'I don’t have a straight path.<br>I don’t come from a background that leads to space.<br>So I’m building one.<br>Through code. Through startups. Through learning things I don’t fully understand yet.<br>Through failing, retrying, and figuring things out the hard way.<br>Because if I want to reach somewhere I don’t belong yet…<br>I need to become someone who does.',
+      title: 'Becoming',
+      text: 'There’s no straight path from where I started<br>to where I’m pointed.<br>I don’t come from a background that leads to space.<br>So I’m building the path myself —<br>through code, through startups,<br>through learning things I don’t fully understand yet,<br>through failing and retrying until something gives.<br>Because if I want to reach somewhere I don’t belong yet,<br>the only move is to become someone who does.',
       range: [0.82, 0.87],
       label: 'GROWTH'
     },
@@ -1552,7 +1556,7 @@ function initJourney() {
       id: 'direction',
       chapter: 'Part 10',
       title: 'The Direction',
-      text: 'I’m not chasing some perfect version of success.<br>I’m chasing freedom.<br>Freedom to build.<br>Freedom to explore.<br>Freedom to not feel stuck.<br>And yeah — money is part of that.<br>Because let’s be honest… freedom isn’t free.<br>But beyond all that —<br>I just want to keep moving forward.<br>Because the one thing that scares me the most is:<br>becoming someone I never wanted to be.<br>So I’ll keep building.<br>And maybe one day…<br>I won’t just be looking at space —<br>I’ll be closer to it.',
+      text: 'I’m not chasing some polished version of success.<br>I’m chasing freedom.<br>Freedom to build. To explore. To never feel stuck.<br>And yes — money is part of that.<br>Freedom isn’t free; let’s not pretend otherwise.<br>But underneath it all, the engine is simpler:<br>the thing that scares me most<br>is becoming someone I never wanted to be.<br>So I keep building.<br>And maybe one day I won’t just be looking at space —<br>I’ll be closer to it.',
       range: [0.92, 0.96],
       label: 'FUTURE'
     },
@@ -1560,7 +1564,7 @@ function initJourney() {
       id: 'destination',
       chapter: '',
       title: 'The Journey Continues',
-      text: 'You have reached the edge of the archive.<br><br><button class="nav-btn primary" data-target="explore" style="pointer-events: auto; opacity: 1; transform: none; display: inline-block; margin-top: 1rem;">Explore Planets</button>',
+      text: 'That’s the story so far. The rest is still being written —<br>possibly by whoever’s reading this.<br><br><button class="nav-btn primary" data-target="explore" style="pointer-events: auto; opacity: 1; transform: none; display: inline-block; margin-top: 1rem;">Explore the Planets</button>',
       range: [0.98, 1.0],
       label: 'DESTINATION'
     }
@@ -1668,8 +1672,12 @@ function initJourney() {
       console.log("[Journey] Initialized cinematic engine");
     }
 
-    if (performance.now() - STATE.journeyStartTime < 1000) {
+    // Cinematic intro: glide forward until we reach the first story beat
+    // (4% of the timeline). Target-based, not time-based — slow devices
+    // get the same landing spot, just a slightly longer glide.
+    if (!STATE.journeyIntroDone) {
       STATE.journeyTarget += autoScrollSpeed;
+      if (STATE.journeyTarget >= maxScroll * 0.04) STATE.journeyIntroDone = true;
     }
 
     if (STATE.journeyTarget < 0) STATE.journeyTarget = 0;
