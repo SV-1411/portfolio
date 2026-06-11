@@ -1,0 +1,38 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Credentials
+.env
+
+# Scraper logs
+scraper/*.log
+
+.vercel
+
+# Conversion junk (144MB artifact folder)
+_MConverter.eu_blackhole/
+
+# Original uncompressed frame sources (WebP versions are in public/journey_frames)
+frames_src_png/

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Shivansh Verma | The Celestial Archive</title>
+  <meta name="description" content="Immersive portfolio of Shivansh Verma - Project Manager, Tech Lead, and aspiring innovator.">
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Grotesk:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="loading-state">
+  <!-- Cinematic Overlays -->
+  <div id="page-transition-overlay">
+    <div class="wormhole-tunnel">
+      <div class="wormhole-ring"></div>
+      <div class="wormhole-ring" style="animation-delay: 0.2s"></div>
+      <div class="wormhole-ring" style="animation-delay: 0.4s"></div>
+    </div>
+  </div>
+  <div class="fade-to-black-overlay"></div>
+
+  <!-- ===== CURSOR ===== -->
+  <div id="cursor-glow"></div>
+
+  <!-- ===== TRANSITION OVERLAY ===== -->
+  <div id="transition-overlay"></div>
+
+  <!-- ===== SOUND TOGGLE ===== -->
+  <button class="sound-btn" id="sound-toggle">
+    <div class="sound-on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"></path></svg></div>
+    <div class="sound-off" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5zm.54 8.46l4.24 4.24m0-4.24l-4.24 4.24"></path></svg></div>
+  </button>
+
+  <!-- ===== LOADING SCREEN ===== -->
+  <div id="loading-screen">
+    <div class="loader-content">
+      <div class="loader-terminal">
+        <p class="terminal-line"><span class="terminal-prompt">></span> <span class="terminal-text">INITIALIZING_ARCHIVE...</span></p>
+        <p class="terminal-line"><span class="terminal-prompt">></span> <span class="terminal-text">LOADING_CELESTIAL_ENGINES...</span></p>
+        <p class="terminal-line"><span class="terminal-prompt">></span> <span class="terminal-text ready">SYSTEMS_OPTIMIZED</span><span class="terminal-cursor">_</span></p>
+      </div>
+      <div class="loader-progress"><div class="loader-bar"></div></div>
+    </div>
+  </div>
+
+  <!-- ===== LANDING SCREEN ===== -->
+  <section id="landing" class="screen active">
+    <video class="landing-video" autoplay loop muted playsinline>
+      <source src="galaxy.mp4" type="video/mp4">
+    </video>
+    <canvas id="landing-canvas"></canvas>
+    <div class="landing-overlay"></div>
+    <div class="screen-center">
+      <div class="landing-content">
+        <h1 class="glitch-text" data-text="SHIVANSH VERMA"><span>SHIVANSH VERMA</span></h1>
+        <div class="aesthetic-line"></div>
+        <p class="landing-subtitle">ARCHITECTING SYSTEMS • BUILDING AI EXPERIENCES • LEADING TEAMS</p>
+        <div class="landing-buttons aesthetic-buttons">
+          <button class="nav-btn primary visible" data-target="journey">INITIATE JOURNEY</button>
+          <button class="nav-btn visible" data-target="explore">EXPLORE ARCHIVE</button>
+          <button class="nav-btn visible" data-target="about">DEEP DIVE</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== JOURNEY (STORY MODE) ===== -->
+  <section id="journey" class="screen">
+    <video class="journey-video" autoplay loop muted playsinline style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.15; z-index: 0; pointer-events: none;">
+      <source src="galaxy.mp4" type="video/mp4">
+    </video>
+    <canvas id="journey-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 1; pointer-events: none;"></canvas>
+    
+    <!-- The large scrollable area that drives the animation -->
+    <div class="journey-container" id="journey-scroll-container" style="position: absolute; inset: 0; overflow-y: hidden; overflow-x: hidden; z-index: 5;">
+      <div style="height: 800vh; width: 100%;"></div>
+    </div>
+
+    <!-- The fixed overlay where text appears -->
+    <div class="journey-overlay" style="position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; z-index: 10; pointer-events: none; padding: 2rem;">
+      <div id="story-part-container" class="story-part-container">
+        <!-- Content handled by main.js timeline -->
+      </div>
+    </div>
+
+    <button class="back-btn" data-target="landing" style="z-index: 10;">← Back</button>
+    <div class="journey-progress" style="z-index: 10;"><div class="journey-progress-bar"></div><div class="journey-progress-label">GENESIS</div></div>
+  </section>
+
+  <!-- ===== EXPLORE (ARCHIVE MODE) ===== -->
+  <section id="explore" class="screen">
+    <button class="back-btn" data-target="landing">← Back</button>
+    <canvas id="space-canvas"></canvas>
+    
+    <div id="explore-hud">
+      <div class="hud-controls">
+        <div class="hud-item"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> <span>THRUSTERS</span></div>
+        <div class="hud-item"><kbd>SHIFT</kbd> <span>BOOST</span></div>
+        <div class="hud-item"><kbd>E</kbd> <span>SCAN_NODE</span></div>
+        <div class="hud-item"><span>COORD: <span id="hud-pos">0, 0</span></span></div>
+        <div class="hud-item boost-telemetry">
+          <div class="boost-label">PROPULSION</div>
+          <div class="boost-bar-bg"><div id="boost-bar" class="boost-bar-fill"></div></div>
+        </div>
+      </div>
+      <div id="explore-prompt" class="hidden">
+        <p id="prompt-text">SCANNING...</p>
+      </div>
+    </div>
+
+    <div id="planet-panel" class="glass-panel hidden">
+      <button class="panel-close" id="panel-close">×</button>
+      <div id="panel-content"></div>
+    </div>
+
+    <!-- Touch controls (visible only on coarse-pointer devices) -->
+    <div id="touch-controls">
+      <div id="joystick-zone">
+        <div id="joystick-base">
+          <div id="joystick-knob"></div>
+        </div>
+      </div>
+      <div id="touch-actions">
+        <button id="btn-boost" class="touch-btn">⚡<span>BOOST</span></button>
+        <button id="btn-interact" class="touch-btn primary">◎<span>SCAN</span></button>
+        <button id="btn-exit" class="touch-btn">✕<span>EXIT</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT (PROFILE MODE) ===== -->
+  <section id="about" class="screen">
+    <button class="back-btn nav-btn" data-target="landing">← Back</button>
+    
+    <div class="about-layout">
+      <div class="about-hero">
+        <div class="about-avatar">
+          <div class="avatar-ring"></div>
+          <div class="avatar-initials">SV</div>
+        </div>
+        <h2 class="about-name">Shivansh Verma</h2>
+        <p class="about-role">Full-Stack & AI Engineer | PM @ Gigzs</p>
+        <div class="about-links" style="display: flex; gap: 1rem;">
+          <a href="https://linkedin.com/in/shivansh-verma" target="_blank" class="nav-btn primary">LinkedIn</a>
+          <a href="https://github.com/Shivansh-Verma" target="_blank" class="nav-btn">GitHub</a>
+        </div>
+      </div>
+
+      <div class="about-sections">
+        <div class="about-block glass-card">
+          <h3 style="font-weight: 300; letter-spacing: 2px; color: var(--neon-blue); text-transform: uppercase;">Skills</h3>
+          <div class="skills-grid" style="display: grid; gap: 1rem; margin-top: 1rem;">
+            <div class="skill-category">
+              <h4 class="category-title" style="color: #aaa; margin-bottom: 0.5rem;">Web & Mobile</h4>
+              <p style="font-size: 0.9rem; color: #ddd; margin: 0;">Next.js, React, Node.js, Express, Capacitor, Android Studio, Xcode</p>
+            </div>
+            <div class="skill-category">
+              <h4 class="category-title" style="color: #aaa; margin-bottom: 0.5rem;">AI & Machine Learning</h4>
+              <p style="font-size: 0.9rem; color: #ddd; margin: 0;">YOLOv8, TensorFlow, LLM Orchestration, RAG Pipelines, Vector Embeddings</p>
+            </div>
+            <div class="skill-category">
+              <h4 class="category-title" style="color: #aaa; margin-bottom: 0.5rem;">Data & Infrastructure</h4>
+              <p style="font-size: 0.9rem; color: #ddd; margin: 0;">Supabase, Pinecone, ChromaDB, Azure VM, Nginx, Docker, Git</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-block glass-card">
+          <h3 style="font-weight: 300; letter-spacing: 2px; color: var(--neon-blue); text-transform: uppercase;">Education</h3>
+          <div class="education-list" style="margin-top: 1rem;">
+            <div class="exp-item" style="border-left: 1px solid var(--neon-blue); padding-left: 1rem;">
+              <h4 style="margin: 0; color: #fff; font-weight: 500;">Bachelor of Technology in Computer Science & Engineering</h4>
+              <p style="margin: 0.2rem 0; font-size: 0.8rem; color: #aaa; font-family: var(--font-mono);">G.H. Raisoni College of Engineering, Nagpur • 2023 — 2027</p>
+              <p style="font-size: 0.9rem; color: #ccc; margin-top: 0.5rem; line-height: 1.5;">Focused on theoretical foundations and practical systems. Currently maintaining a 8.95 CGPA.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-block glass-card">
+          <h3 style="font-weight: 300; letter-spacing: 2px; color: var(--neon-blue); text-transform: uppercase;">Experience</h3>
+          <div class="experience-list" style="margin-top: 1rem;">
+            <div class="exp-item" style="margin-bottom: 1.5rem; border-left: 1px solid var(--neon-blue); padding-left: 1rem;">
+              <h4 style="margin: 0; color: #fff; font-weight: 500;">Project Manager & Full-Stack Developer</h4>
+              <p style="margin: 0.2rem 0; font-size: 0.8rem; color: #aaa; font-family: var(--font-mono);">Gigzs • Sept 2024 — Present</p>
+              <p style="font-size: 0.9rem; color: #ccc; margin-top: 0.5rem; line-height: 1.5;">Leading a 6-person team to build an AI-powered gig marketplace. Owned full-stack delivery and defined the product roadmap to reach 500+ users.</p>
+            </div>
+            <div class="exp-item" style="margin-bottom: 1.5rem; border-left: 1px solid var(--neon-blue); padding-left: 1rem;">
+              <h4 style="margin: 0; color: #fff; font-weight: 500;">Full-Stack & AI Engineer</h4>
+              <p style="margin: 0.2rem 0; font-size: 0.8rem; color: #aaa; font-family: var(--font-mono);">NASA Space Apps Nagpur • 2022 — 2025</p>
+              <p style="font-size: 0.9rem; color: #ccc; margin-top: 0.5rem; line-height: 1.5;">Technical Lead orchestrating city-wide hackathons and managing event infrastructure. Providing mentorship on AI and systems architecture.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-block glass-card">
+          <h3 style="font-weight: 300; letter-spacing: 2px; color: var(--neon-blue); text-transform: uppercase;">Key Projects</h3>
+          <div class="projects-list" style="display: grid; gap: 1rem; margin-top: 1rem;">
+            <div class="project-item" style="padding: 1.5rem; border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; background: rgba(0,0,0,0.2);">
+              <h4 style="margin: 0; color: #fff; font-weight: 500;">Gigzs Memory Layer (GML)</h4>
+              <p style="font-size: 0.8rem; color: var(--neon-blue); margin: 0.4rem 0; font-family: var(--font-mono);">Vector Embeddings • AI Agents • Python</p>
+              <p style="font-size: 0.9rem; color: #ccc; margin: 0.5rem 0 0 0; line-height: 1.5;">A semantic memory system enabling AI to model long-term context via vector relationships instead of raw text history.</p>
+            </div>
+            <div class="project-item" style="padding: 1.5rem; border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; background: rgba(0,0,0,0.2);">
+              <h4 style="margin: 0; color: #fff; font-weight: 500;">Drishti Cap</h4>
+              <p style="font-size: 0.8rem; color: var(--neon-blue); margin: 0.4rem 0; font-family: var(--font-mono);">Python • YOLOv8 • Raspberry Pi</p>
+              <p style="font-size: 0.9rem; color: #ccc; margin: 0.5rem 0 0 0; line-height: 1.5;">Wearable edge-AI device for visually impaired navigation. Features object detection and facial recognition on-device.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="main-nav">
+    <div class="nav-links">
+      <button class="nav-btn" data-target="landing">Home</button>
+      <button class="nav-btn" data-target="journey">Journey</button>
+      <button class="nav-btn" data-target="explore">Archive</button>
+      <button class="nav-btn" data-target="about">Profile</button>
+    </div>
+  </nav>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

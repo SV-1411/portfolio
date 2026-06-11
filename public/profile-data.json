@@ -1,0 +1,105 @@
+{
+  "lastUpdated": "2026-05-01T22:52:00Z",
+  "name": "Shivansh Verma",
+  "headline": "Project Manager @ Gigzs | Tech Lead – NASA Space Apps Nagpur | Full-Stack & AI Engineer",
+  "about": "Developer focused on building practical, reliable systems that work beyond the basics. I value clarity, efficiency, and building systems that hold up in real-world use cases. Passionate about AI architecture, space, and automotive engineering.",
+  "experience": [
+    {
+      "role": "Project Manager",
+      "company": "Gigzs",
+      "duration": "Sept 2024 - Present",
+      "description": "Leading product strategy and cross-functional teams for an AI-powered gig marketplace. Owned full-stack delivery, defined product roadmap, and managed a 6-person team to reach 500+ users."
+    },
+    {
+      "role": "Freelancer",
+      "company": "Upwork, Fiverr, Remote Platforms",
+      "duration": "2024 - 2025",
+      "description": "Delivered 5+ client projects across web, mobile, and cross-platform including a live founder networking app and a US real estate MLS platform."
+    },
+    {
+      "role": "Technical Lead",
+      "company": "NASA International Space Apps Challenge",
+      "duration": "2022 - 2025",
+      "description": "Orchestrated city-wide hackathons in Nagpur, led technical mentorship, and managed event infrastructure for hundreds of participants."
+    },
+    {
+      "role": "Webmaster & Secretary",
+      "company": "IEEE Student Branch GHRCE",
+      "duration": "2024 - 2025",
+      "description": "Managed technical web infrastructure, official communications, and technical outreach for the Computer Society and student branch."
+    }
+  ],
+  "projects": [
+    {
+      "title": "Gigzs Memory Layer (GML)",
+      "duration": "2025",
+      "tag": "AI & Memory",
+      "description": "A semantic, relational memory system for AI that models Entities, Relationships, and Events as vector embeddings for long-term contextual recall.",
+      "tech": ["Vector Embeddings", "AI Agents", "Cosine Similarity"]
+    },
+    {
+      "title": "Drishti Cap",
+      "duration": "2024",
+      "tag": "AI Wearable",
+      "description": "Wearable camera-cap on Raspberry Pi delivering real-time object detection and facial recognition for the visually impaired. Uses optimized YOLOv8 for edge inference.",
+      "tech": ["Python", "YOLOv8", "TensorFlow", "Raspberry Pi"]
+    },
+    {
+      "title": "ArqivAI",
+      "duration": "2025",
+      "tag": "Research AI",
+      "description": "AI-Powered Research Assistant that integrates multiple AI models to reduce hallucinations using intelligent confidence scoring.",
+      "tech": ["FastAPI", "Multi-Model Integration", "LLM Orchestration"],
+      "link": "https://arqiv.kesug.com/?i=1"
+    }
+  ],
+  "education": [
+    {
+      "school": "G.H. Raisoni College of Engineering, Nagpur",
+      "degree": "Bachelor of Technology in Computer Science & Engineering",
+      "dates": "2023 - 2027",
+      "description": "Currently maintaining a 8.95 CGPA. Focused on systems architecture and AI."
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Supervised Machine Learning: Regression and Classification",
+      "issuer": "Stanford University (Andrew Ng)"
+    },
+    {
+      "name": "Next.js 15+ Advanced Patterns",
+      "issuer": "Vercel / Independent"
+    }
+  ],
+  "skills": [
+    {
+      "category": "Core Languages",
+      "items": [
+        { "name": "JavaScript/TypeScript", "level": 90 },
+        { "name": "Python", "level": 85 },
+        { "name": "Java", "level": 80 },
+        { "name": "C++", "level": 80 },
+        { "name": "PHP/SQL", "level": 85 }
+      ]
+    },
+    {
+      "category": "Web & Mobile",
+      "items": [
+        { "name": "Next.js & React", "level": 90 },
+        { "name": "Node.js & Express", "level": 85 },
+        { "name": "Capacitor/Mobile", "level": 80 },
+        { "name": "HTML5/CSS3", "level": 95 }
+      ]
+    },
+    {
+      "category": "AI & Infrastructure",
+      "items": [
+        { "name": "YOLOv8 & TensorFlow", "level": 85 },
+        { "name": "LLM & RAG Pipelines", "level": 90 },
+        { "name": "Supabase & Pinecone", "level": 85 },
+        { "name": "Azure VM & Nginx", "level": 80 },
+        { "name": "Docker & Git", "level": 90 }
+      ]
+    }
+  ]
+}
